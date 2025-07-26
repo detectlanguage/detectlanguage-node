@@ -7,8 +7,7 @@ export interface Options {
 
 export interface DetectionResult {
   language: string,
-  isReliable: boolean,
-  confidence: number,
+  score: number,
 }
 
 export interface Language {
@@ -16,7 +15,7 @@ export interface Language {
   name: string,
 }
 
-export interface UserStatus {
+export interface AccountStatus {
   status: string,
   date: string,
   requests: number,
@@ -36,8 +35,8 @@ export default class DetectLanguage {
   client: Client;
   constructor (apiKey: string, options?: Options);
   detect(text: string): Promise<DetectionResult[]>
-  detect(text: string[]): Promise<DetectionResult[][]>;
+  detectBatch(texts: string[]): Promise<DetectionResult[][]>;
   detectCode(text: string): Promise<string | null>;
   languages(): Promise<Language[]>;
-  userStatus(): Promise<UserStatus>;
+  accountStatus(): Promise<AccountStatus>;
 }

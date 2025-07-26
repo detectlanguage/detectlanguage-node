@@ -4,6 +4,6 @@ module.exports = {
   timeout: 60,
   protocol: 'https',
   host: 'ws.detectlanguage.com',
-  apiVersion: '0.2',
+  apiVersion: 'v3',
   userAgent: `detectlanguage-node/${version}`,
 };

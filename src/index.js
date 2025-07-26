@@ -6,9 +6,20 @@ class API {
   }
 
   async detect(text) {
-    const response = await this.client.post('detect', { q: text });
+    if (Array.isArray(text)) {
+      process.emitWarning(
+        'detect() called with an array is deprecated. Use detectBatch() instead.',
+        'DeprecationWarning',
+        'DETECT_ARRAY_DEPRECATION',
+      );
+      return this.detectBatch(text);
+    }
 
-    return response.data.detections;
+    return this.client.post('detect', { q: text });
+  }
+
+  async detectBatch(texts) {
+    return this.client.post('detect-batch', { q: texts });
   }
 
   async detectCode(text) {
@@ -21,8 +32,19 @@ class API {
     return this.client.get('languages');
   }
 
+  async accountStatus() {
+    return this.client.get('account/status');
+  }
+
+  // @deprecated
   async userStatus() {
-    return this.client.get('user/status');
+    process.emitWarning(
+      'userStatus() is deprecated. Use accountStatus() instead.',
+      'DeprecationWarning',
+      'USER_STATUS_DEPRECATION',
+    );
+
+    return this.accountStatus();
   }
 }
 
