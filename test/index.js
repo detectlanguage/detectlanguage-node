@@ -26,7 +26,7 @@ describe('detect', () => {
     expect(result[0].score).to.be.a('number');
   });
 
-  it('detects language', async () => {
+  it('fails with invalid API key', async () => {
     detectLanguage = new DetectLanguage('invalid');
 
     await expect(detectLanguage.detect('hello')).to.be.rejectedWith('Invalid API key');

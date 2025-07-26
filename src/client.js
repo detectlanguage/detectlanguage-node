@@ -42,13 +42,11 @@ export default class Client {
 
   async request(path, options = {}) {
     try {
-      const fetchOptions = {
+      const response = await fetch(this.baseURL + path, {
         headers: this.headers,
         timeout: this.timeout,
         ...options,
-      };
-
-      const response = await fetch(this.baseURL + path, fetchOptions);
+      });
 
       if (!response.ok) {
         throw new Error(await response.text());
