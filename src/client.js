@@ -40,13 +40,26 @@ export default class Client {
     });
   }
 
+  /**
+   * Base request method that handles common request logic
+   * @param {string} path - API endpoint path
+   * @param {Object} options - Fetch options
+   * @returns {Promise<Object>} Response data
+   */
   async request(path, options = {}) {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => {
+        controller.abort();
+      }, this.timeout);
+
       const response = await fetch(this.baseURL + path, {
         headers: this.headers,
-        timeout: this.timeout,
+        signal: controller.signal,
         ...options,
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(await response.text());
@@ -54,6 +67,9 @@ export default class Client {
 
       return await response.json();
     } catch (e) {
+      if (e.name === 'AbortError') {
+        throw new Error(`Request timeout after ${this.timeout}ms`);
+      }
       return handleError(e);
     }
   }
