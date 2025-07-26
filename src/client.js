@@ -6,6 +6,7 @@ export default class Client {
     const config = { ...defaults, ...options };
 
     const headers = {
+      'Content-Type': 'application/json',
       'User-Agent': config.userAgent,
       Authorization: `Bearer ${apiKey}`,
     };
@@ -15,31 +16,39 @@ export default class Client {
     this.headers = headers;
   }
 
+  /**
+   * Make a GET request
+   * @param {string} path - API endpoint path
+   * @returns {Promise<Object>} Response data
+   */
   async get(path) {
-    try {
-      const response = await fetch(this.baseURL + path, {
-        headers: this.headers,
-        timeout: this.timeout,
-      });
-
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-
-      return await response.json();
-    } catch (e) {
-      return handleError(e);
-    }
+    return this.request(path, {
+      method: 'GET',
+    });
   }
 
+  /**
+   * Make a POST request
+   * @param {string} path - API endpoint path
+   * @param {Object} data - Request body data
+   * @returns {Promise<Object>} Response data
+   */
   async post(path, data) {
+    return this.request(path, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async request(path, options = {}) {
     try {
-      const response = await fetch(this.baseURL + path, {
-        method: 'POST',
-        headers: Object.assign(this.headers, { 'Content-Type': 'application/json' }),
-        body: JSON.stringify(data),
+      const fetchOptions = {
+        headers: this.headers,
         timeout: this.timeout,
-      });
+        ...options,
+      };
+
+      const response = await fetch(this.baseURL + path, fetchOptions);
 
       if (!response.ok) {
         throw new Error(await response.text());
