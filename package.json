@@ -35,9 +35,6 @@
     "url": "https://github.com/detectlanguage/detectlanguage-node/issues"
   },
   "homepage": "https://github.com/detectlanguage/detectlanguage-node",
-  "dependencies": {
-    "axios": "^0.21.1"
-  },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
