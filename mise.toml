@@ -6,3 +6,23 @@ _.file = ".env.local"
 
 [tasks]
 test = "yarn test"
+build = "yarn build"
+
+[tasks.examples]
+depends = ["build"]
+run = [
+  "node examples/detect.js",
+  "node examples/detectBatch.js",
+  "node examples/detectCode.js",
+  "node examples/languages.js",
+  "node examples/accountStatus.js"
+]
+
+[tasks.console]
+depends = ["build"]
+run = '''
+  node -i -e "\
+    var DetectLanguage = require('./lib');\
+    var detectlanguage = new DetectLanguage(process.env.DETECTLANGUAGE_API_KEY);\
+  "
+'''
