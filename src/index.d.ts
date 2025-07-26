@@ -22,7 +22,7 @@ export interface AccountStatus {
   bytes: number,
   plan: string,
   plan_expires?: string,
-  daily_rquests_limit: number,
+  daily_requests_limit: number,
   daily_bytes_limit: number,
 }
 
