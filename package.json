@@ -1,6 +1,6 @@
 {
   "name": "detectlanguage",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Detect Language API Node.js Client",
   "main": "./lib/index.js",
   "types": "./src/index.d.ts",

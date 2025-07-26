@@ -4,7 +4,7 @@ Detect Language API Node.js Client
 [![npm version](https://badge.fury.io/js/detectlanguage.svg)](https://badge.fury.io/js/detectlanguage)
 [![Build Status](https://github.com/detectlanguage/detectlanguage-node/actions/workflows/main.yml/badge.svg)](https://github.com/detectlanguage/detectlanguage-node/actions)
 
-Node.js wrapper for the [Detect Language API](https://detectlanguage.com/).
+Node.js client for the [Detect Language API](https://detectlanguage.com/).
 
 ## Installation
 
