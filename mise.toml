@@ -1,0 +1,8 @@
+[tools]
+node = "20"
+
+[env]
+_.file = ".env.local"
+
+[tasks]
+test = "yarn test"
