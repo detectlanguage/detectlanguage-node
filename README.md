@@ -12,6 +12,10 @@ Node.js client for the [Detect Language API](https://detectlanguage.com/).
 npm install detectlanguage [--save]
 ```
 
+### Upgrading
+
+When upgrading please check [changelog](CHANGELOG.md) for breaking changes.
+
 ## Configuration
 
 Before using Detect Language API client you have to setup your personal API key.
