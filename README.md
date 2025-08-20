@@ -4,13 +4,17 @@ Detect Language API Node.js Client
 [![npm version](https://badge.fury.io/js/detectlanguage.svg)](https://badge.fury.io/js/detectlanguage)
 [![Build Status](https://github.com/detectlanguage/detectlanguage-node/actions/workflows/main.yml/badge.svg)](https://github.com/detectlanguage/detectlanguage-node/actions)
 
-Node.js wrapper for the [Detect Language API](https://detectlanguage.com/).
+Node.js client for the [Detect Language API](https://detectlanguage.com/).
 
 ## Installation
 
 ```
 npm install detectlanguage [--save]
 ```
+
+### Upgrading
+
+When upgrading please check [changelog](CHANGELOG.md) for breaking changes.
 
 ## Configuration
 
@@ -40,13 +44,7 @@ detectlanguage.detect(text).then(function(result) {
 #### Response
 
 ```javascript
-[
-  {
-    "language": "en",
-    "isReliable": true,
-    "confidence": 18.2
-  }
-]
+[{"language":"en","score":0.9955}]
 ```
 
 ### Batch Detection (recommended)
@@ -57,7 +55,7 @@ It is much faster than doing request for each text individually.
 ```javascript
 var texts = ['šešios žąsys', 'Strč prst skrz krk'];
 
-detectlanguage.detect(texts).then(function(result) {
+detectlanguage.detectBatch(texts).then(function(result) {
   console.log(JSON.stringify(result));
 });
 ```
@@ -69,22 +67,20 @@ detectlanguage.detect(texts).then(function(result) {
   [
     {
       "language": "lt",
-      "isReliable": true,
-      "confidence": 5.5
+      "score": 0.8696
     }
   ],
   [
     {
       "language": "cs",
-      "isReliable": true,
-      "confidence": 3.645
+      "score": 0.3653
     },
     ...
   ]
 ]
 ```
 
-### Language Code Detection 
+### Language Code Detection
 
 Returns first detected language code.
 
@@ -117,27 +113,23 @@ detectlanguage.languages().then(function(result) {
 ```javascript
 [
   {
-    code: "aa",
-    name: "AFAR"
+    "code": "aa",
+    "name": "Afar"
   },
   {
-    code: "ab",
-    name: "ABKHAZIAN"
+    "code": "ab",
+    "name": "Abkhazian"
   },
-  {
-    code: "af",
-    name: "AFRIKAANS"
-  }
   ...
 ]
 ```
 
-### User Status
+### Account Status
 
 Returns information about your account and it's status.
 
 ```javascript
-detectlanguage.userStatus().then(function(result) {
+detectlanguage.accountStatus().then(function(result) {
   console.log(JSON.stringify(result));
 });
 ```

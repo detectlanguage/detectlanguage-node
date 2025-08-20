@@ -6,10 +6,10 @@ jobs:
     strategy:
       matrix:
         node-version:
+          - 24
+          - 22
+          - 20
           - 18
-          - 14
-          - 12
-          - 10
     name: Node ${{ matrix.node-version }} sample
     steps:
       - uses: actions/checkout@v3

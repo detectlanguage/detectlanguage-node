@@ -1,9 +1,9 @@
 const { version } = require('../package.json');
 
 module.exports = {
-  timeout: 60,
+  timeout: 60, // seconds
   protocol: 'https',
   host: 'ws.detectlanguage.com',
-  apiVersion: '0.2',
+  apiVersion: 'v3',
   userAgent: `detectlanguage-node/${version}`,
 };
