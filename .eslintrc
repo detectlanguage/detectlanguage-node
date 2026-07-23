@@ -1,11 +1,18 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb/base",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-env"]
+    }
+  },
+  "extends": "airbnb-base",
   "env": {
     "mocha": true,
     "browser": true
   },
   "rules": {
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "import/no-import-module-exports": "off"
   }
 }
